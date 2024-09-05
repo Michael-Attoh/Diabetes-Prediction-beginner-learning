@@ -46,19 +46,22 @@ import seaborn as sns
 data = pd.read_csv('data_for_ML/diabetes.csv')
 ```
 ## view the first few columns of the data
-```python
-data.head()
-```
+<img width="945" alt="datahead" src="https://github.com/user-attachments/assets/601e401c-4aaf-462b-b0e6-341415d2f181">
+
 ## Check for null values
 Identify missing values and take appropriate action, such as removing or imputing them.
-```python
-data.isnull().sum()
-```
+
+<img width="259" alt="isnull" src="https://github.com/user-attachments/assets/0a03c2fa-f57e-4c7c-a0a0-33eb1b257d6e">
+
+
 ## Check the summary statistics
 ```python
 data.describe()
 ```
-## Since it's a classification problem, check the cass distribution of the target variable
+<img width="1111" alt="datadescribe" src="https://github.com/user-attachments/assets/fa57e07c-b625-4095-95a6-41fee3b6142e">
+
+
+## Since it's a classification problem, check the class distribution of the target variable
 ```python
 data['Outcome'].value_counts()
 ```
@@ -66,6 +69,8 @@ Then the percentage distribution of each class in the target variable:
 ```python
 data['Outcome'].value_counts(normalize=True)*100
 ```
+<img width="441" alt="valuecount" src="https://github.com/user-attachments/assets/9ed394ec-82ff-4b9f-b2a8-3e7aeae2b93c">
+
 To address the class imbalance in our target variable, we can set the model’s class_weight parameter to 'balanced' to manage this imbalance more effectively.
 ```python
 from sklearn.linear_model import LogisticRegression    
@@ -83,25 +88,33 @@ sns.distplot(data['Pregnancies'])
 plt.subplot(122)
 data['Pregnancies'].plot.box(figsize=(15,5))
 ```
+<img width="1313" alt="snspregnancy" src="https://github.com/user-attachments/assets/cc476e21-22a9-4bcd-8520-eeb9c97637d6">
 
 2. Visuals for each pair of features in the dataset
 ```python
 sns.pairplot(data)
 ```
+![pairplot](https://github.com/user-attachments/assets/3c10f8a6-d04e-4314-80e5-9c186f568152)
+
 3. Correlation metric 
 ```python
 data.corr()
 ```
+
 4. Heat map
 ```python
 ax = plt.subplots(figsize=(12,8))
 corr_matrix = data.corr()
 sns.heatmap(corr_matrix, cmap="coolwarm")
 ```
+<img width="1201" alt="heatmap" src="https://github.com/user-attachments/assets/54a17acf-cd1d-48b8-8bc0-6c101f570e39">
+
 5. compare the average values of features across different classes
 ```python
 data.groupby('Outcome').mean()
 ```
+<img width="1028" alt="groupby" src="https://github.com/user-attachments/assets/836a9ac7-3aae-49db-a848-77ffd94b1b3e">
+
 --
 ## Feature Separation 
 ```python
@@ -126,6 +139,8 @@ Check model performance
 from sklearn.metrics import accuracy_score
 accuracy_score(Y_test, logreg_predict)
 ```
+<img width="354" alt="logregscore" src="https://github.com/user-attachments/assets/4c6ef93c-4738-4a73-9f0d-9e6048597774">
+
 ### Digression
 Classification Model Perfomance Test
 - Accuracy = Correct prediction /total prediciton
@@ -145,6 +160,8 @@ test_data_rs = test_data_np.reshape(1,-1)  #reshape new data
 test_predict = logreg.predict(test_data_rs)
 test_predict  
 ```
+<img width="164" alt="logreg new data score" src="https://github.com/user-attachments/assets/269521a3-640a-4634-a229-c83834d807c9">
+
 ## Confusion Matrix
 ```python
 from sklearn.metrics import classification_report, confusion_matrix
@@ -152,6 +169,9 @@ from sklearn.metrics import classification_report, confusion_matrix
 print(confusion_matrix(Y_test, logreg_predict))
 print(classification_report(Y_test, logreg_predict))
 ```
+<img width="511" alt="logreg confusion matrix" src="https://github.com/user-attachments/assets/ca8ba795-4705-46ed-a175-255858b202d8">
+
+
 ## End of simple Task.
 
 # Proceeding further
@@ -177,12 +197,14 @@ rfc_predict = rfc_model.predict(X_test)
 #check model's performance
 accuracy_score(Y_test, rfc_predict)
 ```
+<img width="410" alt="rfscore" src="https://github.com/user-attachments/assets/664ce1b0-31dd-4ab1-9c8e-017b5581d90b">
 
 ## Check Important features detectected by the mdoel
 ```python
 rfc_model.feature_importances_
 pd.Series(rfc_model.feature_importances_,index=X.columns).plot(kind='barh')
 ```
+<img width="835" alt="rf keyimportant features" src="https://github.com/user-attachments/assets/de3e848b-d88c-4e7a-a8e1-4de047dca494">
 
 # Automation
 Instead of running each line of code, we can automate the whole process.
